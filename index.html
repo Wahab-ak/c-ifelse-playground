@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C If-Else Playground</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+  body { background:#0b1020; }
+  pre code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .kw { color:#c792ea; } .ty { color:#82aaff; } .st { color:#c3e88d; } .pp { color:#f78c6c; } .nm { color:#ffcb6b; }
+  .tab-active { background:#6366f1; color:white; }
+</style>
+</head>
+<body class="min-h-screen text-slate-200 font-sans">
+<div class="max-w-5xl mx-auto px-4 py-10">
+
+  <header class="text-center mb-8">
+    <h1 class="text-4xl font-bold text-white">C <span class="text-indigo-400">if / else</span> Playground</h1>
+    <p class="mt-3 text-slate-400">Four small C programs built with nothing but <code class="text-indigo-300">if</code> and <code class="text-indigo-300">else</code>. No loops, no switch, no ternary. Pick one, read the C code, and run it.</p>
+  </header>
+
+  <nav class="flex flex-wrap justify-center gap-2 mb-6">
+    <button id="tab-grade" onclick="show('grade')" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition">Grade</button>
+    <button id="tab-leap" onclick="show('leap')" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition">Leap Year</button>
+    <button id="tab-tri" onclick="show('tri')" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition">Triangle</button>
+    <button id="tab-num" onclick="show('num')" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition">Number</button>
+  </nav>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <!-- C source -->
+    <section class="bg-slate-900 border border-slate-700 rounded-xl overflow-hidden">
+      <div class="px-4 py-2 bg-slate-800 text-sm text-slate-400 flex justify-between"><span id="filename">grade.c</span><span>C</span></div>
+
+      <pre id="src-grade" class="p-4 text-sm overflow-x-auto"><code><span class="pp">#include &lt;stdio.h&gt;</span>
+
+<span class="ty">int</span> main() {
+    <span class="ty">int</span> marks;
+    printf(<span class="st">"Enter marks (0-100): "</span>);
+    scanf(<span class="st">"%d"</span>, &amp;marks);
+
+    <span class="kw">if</span> (marks &lt; <span class="nm">0</span> || marks &gt; <span class="nm">100</span>) {
+        printf(<span class="st">"Invalid marks\n"</span>);
+    } <span class="kw">else if</span> (marks &gt;= <span class="nm">90</span>) {
+        printf(<span class="st">"Grade A\n"</span>);
+    } <span class="kw">else if</span> (marks &gt;= <span class="nm">80</span>) {
+        printf(<span class="st">"Grade B\n"</span>);
+    } <span class="kw">else if</span> (marks &gt;= <span class="nm">70</span>) {
+        printf(<span class="st">"Grade C\n"</span>);
+    } <span class="kw">else if</span> (marks &gt;= <span class="nm">60</span>) {
+        printf(<span class="st">"Grade D\n"</span>);
+    } <span class="kw">else</span> {
+        printf(<span class="st">"Grade F\n"</span>);
+    }
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</code></pre>
+
+      <pre id="src-leap" class="p-4 text-sm overflow-x-auto hidden"><code><span class="pp">#include &lt;stdio.h&gt;</span>
+
+<span class="ty">int</span> main() {
+    <span class="ty">int</span> year;
+    printf(<span class="st">"Enter a year: "</span>);
+    scanf(<span class="st">"%d"</span>, &amp;year);
+
+    <span class="kw">if</span> (year % <span class="nm">400</span> == <span class="nm">0</span>) {
+        printf(<span class="st">"%d is a leap year\n"</span>, year);
+    } <span class="kw">else if</span> (year % <span class="nm">100</span> == <span class="nm">0</span>) {
+        printf(<span class="st">"%d is not a leap year\n"</span>, year);
+    } <span class="kw">else if</span> (year % <span class="nm">4</span> == <span class="nm">0</span>) {
+        printf(<span class="st">"%d is a leap year\n"</span>, year);
+    } <span class="kw">else</span> {
+        printf(<span class="st">"%d is not a leap year\n"</span>, year);
+    }
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</code></pre>
+
+      <pre id="src-tri" class="p-4 text-sm overflow-x-auto hidden"><code><span class="pp">#include &lt;stdio.h&gt;</span>
+
+<span class="ty">int</span> main() {
+    <span class="ty">int</span> a, b, c;
+    printf(<span class="st">"Enter three sides: "</span>);
+    scanf(<span class="st">"%d %d %d"</span>, &amp;a, &amp;b, &amp;c);
+
+    <span class="kw">if</span> (a &lt;= <span class="nm">0</span> || b &lt;= <span class="nm">0</span> || c &lt;= <span class="nm">0</span>) {
+        printf(<span class="st">"Sides must be positive\n"</span>);
+    } <span class="kw">else if</span> (a + b &lt;= c || a + c &lt;= b || b + c &lt;= a) {
+        printf(<span class="st">"Not a triangle\n"</span>);
+    } <span class="kw">else if</span> (a == b &amp;&amp; b == c) {
+        printf(<span class="st">"Equilateral triangle\n"</span>);
+    } <span class="kw">else if</span> (a == b || b == c || a == c) {
+        printf(<span class="st">"Isosceles triangle\n"</span>);
+    } <span class="kw">else</span> {
+        printf(<span class="st">"Scalene triangle\n"</span>);
+    }
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</code></pre>
+
+      <pre id="src-num" class="p-4 text-sm overflow-x-auto hidden"><code><span class="pp">#include &lt;stdio.h&gt;</span>
+
+<span class="ty">int</span> main() {
+    <span class="ty">int</span> n;
+    printf(<span class="st">"Enter an integer: "</span>);
+    scanf(<span class="st">"%d"</span>, &amp;n);
+
+    <span class="kw">if</span> (n &gt; <span class="nm">0</span>) {
+        printf(<span class="st">"Positive\n"</span>);
+    } <span class="kw">else if</span> (n &lt; <span class="nm">0</span>) {
+        printf(<span class="st">"Negative\n"</span>);
+    } <span class="kw">else</span> {
+        printf(<span class="st">"Zero\n"</span>);
+    }
+
+    <span class="kw">if</span> (n % <span class="nm">2</span> == <span class="nm">0</span>) {
+        printf(<span class="st">"Even\n"</span>);
+    } <span class="kw">else</span> {
+        printf(<span class="st">"Odd\n"</span>);
+    }
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</code></pre>
+    </section>
+
+    <!-- Runner -->
+    <section class="bg-slate-900 border border-slate-700 rounded-xl p-5 flex flex-col gap-4">
+      <h2 class="text-lg font-semibold text-white">Run the program</h2>
+
+      <div id="in-grade" class="space-y-2">
+        <label class="text-sm text-slate-400">Marks (0-100)</label>
+        <input id="grade-marks" type="number" value="85" class="w-full bg-slate-800 rounded-lg px-3 py-2 outline-none focus:ring-2 ring-indigo-500">
+      </div>
+
+      <div id="in-leap" class="space-y-2 hidden">
+        <label class="text-sm text-slate-400">Year</label>
+        <input id="leap-year" type="number" value="2024" class="w-full bg-slate-800 rounded-lg px-3 py-2 outline-none focus:ring-2 ring-indigo-500">
+      </div>
+
+      <div id="in-tri" class="space-y-2 hidden">
+        <label class="text-sm text-slate-400">Sides a, b, c</label>
+        <div class="grid grid-cols-3 gap-2">
+          <input id="tri-a" type="number" value="3" class="bg-slate-800 rounded-lg px-3 py-2 outline-none focus:ring-2 ring-indigo-500">
+          <input id="tri-b" type="number" value="4" class="bg-slate-800 rounded-lg px-3 py-2 outline-none focus:ring-2 ring-indigo-500">
+          <input id="tri-c" type="number" value="5" class="bg-slate-800 rounded-lg px-3 py-2 outline-none focus:ring-2 ring-indigo-500">
+        </div>
+      </div>
+
+      <div id="in-num" class="space-y-2 hidden">
+        <label class="text-sm text-slate-400">Integer</label>
+        <input id="num-n" type="number" value="-7" class="w-full bg-slate-800 rounded-lg px-3 py-2 outline-none focus:ring-2 ring-indigo-500">
+      </div>
+
+      <button onclick="run()" class="bg-indigo-500 hover:bg-indigo-400 text-white font-semibold py-2 rounded-lg transition">Run ▶</button>
+
+      <div>
+        <div class="text-sm text-slate-400 mb-1">Output</div>
+        <pre id="output" class="bg-black rounded-lg p-4 text-green-400 min-h-24 text-sm whitespace-pre-wrap font-mono">$ ./a.out
+(press Run)</pre>
+      </div>
+    </section>
+  </div>
+
+  <p class="text-center text-xs text-slate-500 mt-8">The page logic is written with if / else only as well: no loops, no switch, no ternary operators.</p>
+</div>
+
+<script>
+  var current = 'grade';
+
+  function setHidden(id, hide) {
+    var el = document.getElementById(id);
+    if (hide) { el.classList.add('hidden'); } else { el.classList.remove('hidden'); }
+  }
+
+  function setTab(id, active) {
+    var el = document.getElementById(id);
+    if (active) { el.classList.add('tab-active'); } else { el.classList.remove('tab-active'); }
+  }
+
+  function show(name) {
+    current = name;
+    var g = false, l = false, t = false, n = false;
+    if (name === 'grade') { g = true; }
+    else if (name === 'leap') { l = true; }
+    else if (name === 'tri') { t = true; }
+    else { n = true; }
+
+    setHidden('src-grade', !g); setHidden('in-grade', !g); setTab('tab-grade', g);
+    setHidden('src-leap', !l);  setHidden('in-leap', !l);  setTab('tab-leap', l);
+    setHidden('src-tri', !t);   setHidden('in-tri', !t);   setTab('tab-tri', t);
+    setHidden('src-num', !n);   setHidden('in-num', !n);   setTab('tab-num', n);
+
+    var fn = document.getElementById('filename');
+    if (g) { fn.textContent = 'grade.c'; }
+    else if (l) { fn.textContent = 'leap.c'; }
+    else if (t) { fn.textContent = 'triangle.c'; }
+    else { fn.textContent = 'number.c'; }
+
+    document.getElementById('output').textContent = '$ ./a.out\n(press Run)';
+  }
+
+  function val(id) {
+    return parseInt(document.getElementById(id).value, 10);
+  }
+
+  function runGrade() {
+    var marks = val('grade-marks');
+    if (isNaN(marks)) { return 'Please enter a number'; }
+    else if (marks < 0 || marks > 100) { return 'Invalid marks'; }
+    else if (marks >= 90) { return 'Grade A'; }
+    else if (marks >= 80) { return 'Grade B'; }
+    else if (marks >= 70) { return 'Grade C'; }
+    else if (marks >= 60) { return 'Grade D'; }
+    else { return 'Grade F'; }
+  }
+
+  function runLeap() {
+    var year = val('leap-year');
+    if (isNaN(year)) { return 'Please enter a number'; }
+    else if (year % 400 === 0) { return year + ' is a leap year'; }
+    else if (year % 100 === 0) { return year + ' is not a leap year'; }
+    else if (year % 4 === 0) { return year + ' is a leap year'; }
+    else { return year + ' is not a leap year'; }
+  }
+
+  function runTri() {
+    var a = val('tri-a'), b = val('tri-b'), c = val('tri-c');
+    if (isNaN(a) || isNaN(b) || isNaN(c)) { return 'Please enter three numbers'; }
+    else if (a <= 0 || b <= 0 || c <= 0) { return 'Sides must be positive'; }
+    else if (a + b <= c || a + c <= b || b + c <= a) { return 'Not a triangle'; }
+    else if (a === b && b === c) { return 'Equilateral triangle'; }
+    else if (a === b || b === c || a === c) { return 'Isosceles triangle'; }
+    else { return 'Scalene triangle'; }
+  }
+
+  function runNum() {
+    var n = val('num-n');
+    var first = '', second = '';
+    if (isNaN(n)) { return 'Please enter a number'; }
+    else {
+      if (n > 0) { first = 'Positive'; }
+      else if (n < 0) { first = 'Negative'; }
+      else { first = 'Zero'; }
+
+      if (n % 2 === 0) { second = 'Even'; }
+      else { second = 'Odd'; }
+      return first + '\n' + second;
+    }
+  }
+
+  function run() {
+    var result = '';
+    if (current === 'grade') { result = runGrade(); }
+    else if (current === 'leap') { result = runLeap(); }
+    else if (current === 'tri') { result = runTri(); }
+    else { result = runNum(); }
+    document.getElementById('output').textContent = '$ ./a.out\n' + result;
+  }
+
+  show('grade');
+</script>
+</body>
+</html>
